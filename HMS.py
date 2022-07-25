@@ -1,5 +1,27 @@
 import getpass
 import sqlite3
+def find_violation(current_tags, required_tags):
+    violation = ""
+    for rtag,rvalues in required_tags.iteritems():
+        tag_present = False
+        for tag in current_tags:
+            if tag['key'] == rtag:
+                value_match = False
+                tag_present = True
+                rvaluesplit = rvalues.split(",")
+                for rvalue in rvaluesplit:
+                    if tag['value'] == rvalue:
+                        value_match = True
+                    if tag['value'] != "":
+                        if rvalue == "*":
+                            value_match = True
+                if value_match == False:
+                    violation = violation + "\n" + tag['value'] + " doesn't match any of " + required_tags[rtag] + "!"
+        if not tag_present:
+            violation = violation + "\n" + "Tag " + str(rtag) + " is not present."
+    if violation == "":
+        return None
+    return  violation
 connection=sqlite3.connect('hospital.db')
 cursor=connection.cursor()
 error=1
