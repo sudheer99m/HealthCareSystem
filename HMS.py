@@ -69,7 +69,7 @@ if cursor.fetchone()[0]==0:
     iname VARCHAR2(20) primary key,
     idiagnosis VARCHAR2(50), 
     type varchar2(50) not null);""")
-    cursor.execute("""insert into patient values(101,'Mohit','Nayak','Bangalore','15-March-2001',18,'08-March-2020',9078435952)""")
+    cursor.execute("""insert into patient values(101,'1mohit','Nayak','Bangalore','15-March-2001',18,'08-March-2020',9078435952)""")
     cursor.execute("""insert into patient values(102,'Anikiat','Saraf','Kolkata','22-Dec-2000','19','15-Feb-2020',9674825476)""")
     cursor.execute("""insert into patient values(103,'Rishank','Pratik','Orissa','22-Dec-2001','18','19-Nov-2015',9117854569)""")
     cursor.execute("""insert into patient values(104,'Risav','Jana','Nepal','06-Jan-2001',18,'25-Oct-2010',7854963284)""")
