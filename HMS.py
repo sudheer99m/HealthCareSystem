@@ -1,5 +1,27 @@
 import getpass
 import sqlite3
+import boto3
+from boto3.s3.transfer import S3UploadFailedError
+from botocore.exceptions import ClientError
+
+
+def do_scenario(s3_resource):
+    print('-'*88)
+    print("Welcome to the Amazon S3 getting started demo!")
+    print('-'*88)
+
+    bucket_name = f'doc-example-bucket-{uuid.uuid4()}'
+    bucket = s3_resource.Bucket(bucket_name)
+    try:
+        bucket.create(
+            CreateBucketConfiguration={
+                'LocationConstraint': s3_resource.meta.client.meta.region_name})
+        print(f"Created demo bucket named {bucket.name}.")
+    except ClientError as err:
+        print(f"Tried and failed to create demo bucket {bucket_name}.")
+        print(f"\t{err.response['Error']['Code']}:{err.response['Error']['Message']}")
+        print(f"\nCan't continue the demo without a bucket!")
+        return
 def find_violation(current_tags, required_tags):
     violation = ""
     for rtag,rvalues in required_tags.iteritems():
@@ -234,6 +256,14 @@ connection.close()
 print("")
 def progress(status, remaining, total):
     print(f'Copied {total-remaining} of {total} pages...')
+    altimeter-valeport-lcm/
+├── altimeter_valeport_lcm
+│   ├── __init__.py
+│   ├── __main__.py
+│   ├── parser.py
+│   └── snake_case.py
+├── README.rst
+└── setup.py
 
 try:
     sqliteCon = sqlite3.connect('hospital.db')
