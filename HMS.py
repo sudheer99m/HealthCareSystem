@@ -3,7 +3,18 @@ import sqlite3
 import boto3
 from boto3.s3.transfer import S3UploadFailedError
 from botocore.exceptions import ClientError
-
+{
+   "Version": "2012-10-17",
+   "Statement": [
+      {
+         "Effect": "Allow",
+         "Action": [
+            "codeguru-reviewer:ListRecommendations"
+         ],
+         "Resource": "arn:aws:codeguru-reviewer:us-east-2:123456789012:association:association-uuid"
+      }
+   ]
+}
 
 def do_scenario(s3_resource):
     print('-'*88)
