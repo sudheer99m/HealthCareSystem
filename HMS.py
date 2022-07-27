@@ -15,7 +15,35 @@ from botocore.exceptions import ClientError
       }
    ]
 }
-
+{
+  "Version": "2012-10-17",
+  "Statement": [
+    {
+      "Effect": "Deny",
+      "Action": [
+        "codeguru-reviewer:DescribeRepositoryAssociation"
+      ],
+      "Resource": "*",
+      "Condition": {
+        "ForAnyValue:StringEquals": {
+          "aws:RequestTag/ViewAssocatedRepositoryDetails": "DenyViewRepository"
+        }
+      }
+    },
+    {
+      "Effect": "Deny",
+      "Action": [
+        "codeguru-reviewer:DisassociateRepository"
+      ],
+      "Resource": "*",
+      "Condition": {
+        "ForAnyValue:StringEquals": {
+          "aws:TagKeys": ["DenyDisassociate"]
+        }
+      }
+    }
+  ]
+}
 def do_scenario(s3_resource):
     print('-'*88)
     print("Welcome to the Amazon S3 getting started demo!")
